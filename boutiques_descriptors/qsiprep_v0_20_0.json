@@ -316,7 +316,7 @@
             "value-key": "[COMBINE_ALL_DWIS]"
         },
         {
-            "command-line-flag": "--separate_all_dwis",
+            "command-line-flag": "--separate-all-dwis",
             "description": "Don't attempt to combine dwis from multiple runs. Each will be processed separately.",
             "id": "separate_all_dwis",
             "name": "qsiprep separate all dwis",
