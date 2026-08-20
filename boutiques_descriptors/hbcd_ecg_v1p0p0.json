@@ -4,7 +4,7 @@
     "tool-version": "1.0.0",
     "author": "Columbia University, Department of Psychiatry",
     "url": "https://github.com/DCAN-Labs/HBCD_ECG_pipeline",
-    "command-line": "true [DERIVATIVES_PREFIX]; hbcd_ecg_pipeline [SubjectDirectory] [ECGOutputDirectoryName] [AnalysisLevel] [ParticipantLabel] [SessionLabel] [Tasks] [Acq] [QualityThreshold] [QcWindowSec]",
+    "command-line": "hbcd_ecg_pipeline [SubjectDirectory] [ECGOutputDirectoryName] [AnalysisLevel] [ParticipantLabel] [SessionLabel] [Tasks] [Acq] [QualityThreshold] [QcWindowSec]",
     "description": "The HBCD ECG Pipeline automatically identifies the most likely ECG channel among E125-E128 (using NeuroKit R-peak counts plus a direct correlation-matrix check) and then runs the full ECG QC, RR, HR, and HRV pipeline on the selected channel for each subject/session/task found in a BIDS directory. Files for which no ECG channel can be confidently identified are skipped and logged.",
     "inputs": [
       {
@@ -91,15 +91,6 @@
           "type": "Number",
           "default-value": 10,
           "value-key": "[QcWindowSec]"
-      },
-      {
-          "default-value": "derivatives/",
-          "id": "derivatives_prefix",
-          "name": "derivatives_prefix",
-          "description": "Folder(s) to put before the pipeline-specific output folder in CBRAIN's forced browse path (e.g. DataProvider/derivatives/hbcd_ecg). Not passed to the pipeline script itself. Must end in /.",
-          "optional": true,
-          "type": "String",
-          "value-key": "[DERIVATIVES_PREFIX]"
       }
       ],
     "output-files" : [{
@@ -132,10 +123,6 @@
     "custom": {
         "cbrain:readonly-input-files": true,
         "cbrain:author": "Tanya Pandhi <pandh015@umn.edu>",
-        "cbrain:allow_empty_strings": ["derivatives_prefix"],
-        "cbrain:override-input-string-ruby-regex": {
-            "derivatives_prefix": ":relative-path:"
-        },
         "cbrain:no-run-id-for-outputs": [ "OutputDirectory"],
         "cbrain:integrator_modules": {
             "BoutiquesFileTypeVerifier": {
@@ -160,9 +147,8 @@
                 "OutputDirectory": "HbcdEcgOutput"
             },
             "BoutiquesForcedOutputBrowsePath" : {
-              "OutputDirectory": "[DERIVATIVES_PREFIX]hbcd_ecg"
+              "OutputDirectory": "hbcd_ecg"
             },
-            "BoutiquesBidsSubjectFileSelector": { "SubjectDirectory": "all_to_keep" },
             "BoutiquesBidsSingleSubjectMaker": "SubjectDirectory",
             "BoutiquesOutputCacheCleaner": ["OutputDirectory"]
         }
