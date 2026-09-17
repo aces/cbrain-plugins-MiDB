@@ -1,7 +1,7 @@
 {
   "name": "HBCD_ReproTM",
   "description": "A pipeline for generating precision functional maps via Template Matching from denoised CIFTI time series.",
-  "tool-version": "1.0.0_0f306a2f-0ef9c88a_tpl-ABCC",
+  "tool-version": "1.0.0_d902942d-7a4c379b_tpl-ABCC",
   "schema-version": "0.5",
   "url": "https://github.com/DCAN-Labs/HBCD_ReproTM",
   "command-line": "hbcd_reprotm [BIDS_DIR] [OUTPUT_DIR] --subject-id [SUBJECT_ID] --session-id [SESSION_ID] [XCPD_VER] [MINUTES] [FD_THRESHOLD] [SMOOTHING_KERNEL] [TR] [MINSIZE] [TEMPLATE_INFILE] [TEMPLATE_OUTFILE_NAME] [TEMPLATE_NETWORKS] [MCR_ROOT_V91] [MCR_ROOT_V96] [SUPPORT_DIR] [SURFACE_ONLY] [REFINE_SCAN] [REFINE_SCAN_MINTHRESHOLD] [RUN_SPATIAL_INTERPOLATION]",
@@ -204,7 +204,7 @@
       "id": "reprotm_output_dir",
       "description": "Subject/session-level ReproTM output directory containing the final MATLAB and CIFTI label outputs.",
       "optional": false,
-      "path-template": "[OUTPUT_DIR]/ReproTM_0f306a2f+0ef9c88a_tpl-ABCC/sub-[SUBJECT_ID]"
+      "path-template": "[OUTPUT_DIR]/ReproTM_d902942d+7a4c379b_tpl-ABCC/sub-[SUBJECT_ID]"
     }
   ],
   "groups": [
@@ -274,20 +274,20 @@
       },
       "BoutiquesOutputTagger": {
         "reprotm_output_dir": [
-          "reprotm_0f306a2f+0ef9c88a"
+          "reprotm_d902942d+7a4c379b"
         ]
       },
       "BoutiquesForcedOutputBrowsePath": {
-        "reprotm_output_dir": "ReproTM_0f306a2f+0ef9c88a_tpl-ABCC"
+        "reprotm_output_dir": "ReproTM_d902942d+7a4c379b_tpl-ABCC"
       },
       "BoutiquesTaskLogsCopier": {
-        "stdout": "[OUTPUT_DIR]/ReproTM_0f306a2f+0ef9c88a_tpl-ABCC/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/stdout_.log",
-        "stderr": "[OUTPUT_DIR]/ReproTM_0f306a2f+0ef9c88a_tpl-ABCC/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/stderr.log",
-        "runtime": "[OUTPUT_DIR]/ReproTM_0f306a2f+0ef9c88a_tpl-ABCC/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/runtime_info.properties",
-        "descriptor": "[OUTPUT_DIR]/ReproTM_0f306a2f+0ef9c88a_tpl-ABCC/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/boutiques_descriptor.json",
-        "invoke": "[OUTPUT_DIR]/ReproTM_0f306a2f+0ef9c88a_tpl-ABCC/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/boutiques_invoke.json",
-        "jobscript": "[OUTPUT_DIR]/ReproTM_0f306a2f+0ef9c88a_tpl-ABCC/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/job_script.sh",
-        "cbrain_params": "[OUTPUT_DIR]/ReproTM_0f306a2f+0ef9c88a_tpl-ABCC/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/cbrain_params.json"
+        "stdout": "[OUTPUT_DIR]/ReproTM_d902942d+7a4c379b_tpl-ABCC/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/stdout_.log",
+        "stderr": "[OUTPUT_DIR]/ReproTM_d902942d+7a4c379b_tpl-ABCC/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/stderr.log",
+        "runtime": "[OUTPUT_DIR]/ReproTM_d902942d+7a4c379b_tpl-ABCC/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/runtime_info.properties",
+        "descriptor": "[OUTPUT_DIR]/ReproTM_d902942d+7a4c379b_tpl-ABCC/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/boutiques_descriptor.json",
+        "invoke": "[OUTPUT_DIR]/ReproTM_d902942d+7a4c379b_tpl-ABCC/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/boutiques_invoke.json",
+        "jobscript": "[OUTPUT_DIR]/ReproTM_d902942d+7a4c379b_tpl-ABCC/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/job_script.sh",
+        "cbrain_params": "[OUTPUT_DIR]/ReproTM_d902942d+7a4c379b_tpl-ABCC/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/cbrain_params.json"
       },
       "BoutiquesPostProcessingCleaner": [
         "work",

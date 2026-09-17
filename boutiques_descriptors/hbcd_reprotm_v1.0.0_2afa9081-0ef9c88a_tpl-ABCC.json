@@ -259,7 +259,7 @@
   },
   "suggested-resources": {
     "cpu-cores": 2,
-    "ram": 40,
+    "ram": 300,
     "walltime-estimate": 18000
   },
   "custom": {
@@ -289,7 +289,6 @@
         "jobscript": "[OUTPUT_DIR]/ReproTM_2afa9081+0ef9c88a_tpl-ABCC/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/job_script.sh",
         "cbrain_params": "[OUTPUT_DIR]/ReproTM_2afa9081+0ef9c88a_tpl-ABCC/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/cbrain_params.json"
       },
-      "BoutiquesBidsSingleSubjectMaker": "bids_dir",
       "BoutiquesPostProcessingCleaner": [
         "work",
         "[BIDS_DIR]",
