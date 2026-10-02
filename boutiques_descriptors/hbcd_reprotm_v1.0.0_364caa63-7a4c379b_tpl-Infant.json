@@ -1,0 +1,305 @@
+{
+  "name": "HBCD_ReproTM",
+  "description": "A pipeline for generating precision functional maps via Template Matching from denoised CIFTI time series.",
+  "tool-version": "1.0.0_364caa63-7a4c379b_tpl-MIDB-infant",
+  "schema-version": "0.5",
+  "url": "https://github.com/DCAN-Labs/HBCD_ReproTM",
+  "command-line": "hbcd_reprotm [BIDS_DIR] [OUTPUT_DIR] --subject-id [SUBJECT_ID] --session-id [SESSION_ID] [XCPD_VER] [MINUTES] [FD_THRESHOLD] [SMOOTHING_KERNEL] [TR] [MINSIZE] [TEMPLATE_INFILE] [TEMPLATE_OUTFILE_NAME] [TEMPLATE_NETWORKS] [MCR_ROOT_V91] [MCR_ROOT_V96] [SUPPORT_DIR] [SURFACE_ONLY] [REFINE_SCAN] [REFINE_SCAN_MINTHRESHOLD] [RUN_SPATIAL_INTERPOLATION]",
+  "container-image": {
+    "image": "dcanumn/hbcd_reprotm:1.0.0",
+    "index": "docker://",
+    "type": "singularity"
+  },
+  "inputs": [
+    {
+      "description": "Root directory containing the staged HBCD ReproTM input derivatives. Must contain sub-<subject-id>/ses-<session-id>/func and anat directories.",
+      "id": "bids_dir",
+      "name": "bids_dir",
+      "optional": false,
+      "type": "File",
+      "value-key": "[BIDS_DIR]"
+    },
+    {
+      "description": "Directory where HBCD ReproTM outputs will be written.",
+      "id": "output_dir",
+      "name": "output_dir",
+      "optional": false,
+      "type": "String",
+      "value-key": "[OUTPUT_DIR]"
+    },
+    {
+      "id": "subject_id",
+      "name": "Subject ID",
+      "description": "Subject identifier used to locate the input sub-<subject-id> directory.",
+      "optional": false,
+      "type": "String",
+      "value-key": "[SUBJECT_ID]"
+    },
+    {
+      "id": "session_id",
+      "name": "Session ID",
+      "description": "Session identifier used to locate the input ses-<session-id> directory.",
+      "optional": false,
+      "type": "String",
+      "value-key": "[SESSION_ID]"
+    },
+    {
+      "command-line-flag": "--xcpd-ver",
+      "id": "xcpd_ver",
+      "name": "XCP-D version/hash",
+      "description": "XCP-D hash used in the filenames of the denoised CIFTI time series and XCP-D QC HDF5 file.",
+      "optional": false,
+      "type": "String",
+      "value-key": "[XCPD_VER]"
+    },
+    {
+      "command-line-flag": "--minutes",
+      "id": "minutes",
+      "name": "Minutes",
+      "description": "Minutes of data used for connectivity.",
+      "optional": true,
+      "type": "Number",
+      "value-key": "[MINUTES]",
+      "default-value": 10
+    },
+    {
+      "command-line-flag": "--fd-threshold",
+      "id": "fd_threshold",
+      "name": "Framewise displacement threshold",
+      "description": "Framewise displacement censoring threshold.",
+      "optional": true,
+      "type": "Number",
+      "value-key": "[FD_THRESHOLD]",
+      "default-value": 0.2
+    },
+    {
+      "command-line-flag": "--smoothing-kernel",
+      "id": "smoothing_kernel",
+      "name": "Smoothing kernel",
+      "description": "Smoothing kernel value in mm used for connectivity processing and final output naming.",
+      "optional": true,
+      "type": "Number",
+      "value-key": "[SMOOTHING_KERNEL]",
+      "default-value": 2.25
+    },
+    {
+      "command-line-flag": "--tr",
+      "id": "tr",
+      "name": "TR",
+      "description": "Repetition time in seconds.",
+      "optional": true,
+      "type": "Number",
+      "value-key": "[TR]",
+      "default-value": 1.725
+    },
+    {
+      "command-line-flag": "--minsize",
+      "id": "minsize",
+      "name": "Minimum network size",
+      "description": "Minimum network size retained during cleanup.",
+      "optional": true,
+      "type": "Number",
+      "value-key": "[MINSIZE]",
+      "default-value": 30
+    },
+    {
+      "command-line-flag": "--template-infile",
+      "id": "template_infile",
+      "name": "Template input file",
+      "description": "Template MATLAB .mat file used for template matching. If omitted, the container default is used.",
+      "optional": true,
+      "type": "File",
+      "value-key": "[TEMPLATE_INFILE]"
+    },
+    {
+      "command-line-flag": "--template-outfile-name",
+      "id": "template_outfile_name",
+      "name": "Template output filename",
+      "description": "Template name used in final output filenames.",
+      "optional": true,
+      "type": "String",
+      "value-key": "[TEMPLATE_OUTFILE_NAME]",
+      "default-value": "template-ABCC-a3-9to16"
+    },
+    {
+      "command-line-flag": "--template-networks",
+      "id": "template_networks",
+      "name": "Template networks",
+      "description": "Space-separated template network labels.",
+      "optional": true,
+      "type": "String",
+      "value-key": "[TEMPLATE_NETWORKS]"
+    },
+    {
+      "command-line-flag": "--mcr-root-v91",
+      "id": "mcr_root_v91",
+      "name": "MATLAB Runtime v91",
+      "description": "MATLAB Runtime v91 installation used by cifti_conn.",
+      "optional": true,
+      "type": "String",
+      "value-key": "[MCR_ROOT_V91]",
+      "default-value": "/opt/mcr91/v91"
+    },
+    {
+      "command-line-flag": "--mcr-root-v96",
+      "id": "mcr_root_v96",
+      "name": "MATLAB Runtime v96",
+      "description": "MATLAB Runtime v96 installation used by compiled wrappers.",
+      "optional": true,
+      "type": "String",
+      "value-key": "[MCR_ROOT_V96]",
+      "default-value": "/opt/mcr96/v96"
+    },
+    {
+      "command-line-flag": "--support-dir",
+      "id": "support_dir",
+      "name": "Support directory",
+      "description": "Support/template directory mounted in the container.",
+      "optional": true,
+      "type": "String",
+      "value-key": "[SUPPORT_DIR]",
+      "default-value": "/mnt/support"
+    },
+    {
+      "command-line-flag": "--surface-only",
+      "id": "surface_only",
+      "name": "Surface only",
+      "description": "Process surface data only.",
+      "optional": true,
+      "type": "Flag",
+      "value-key": "[SURFACE_ONLY]"
+    },
+    {
+      "command-line-flag": "--refineSCAN",
+      "id": "refine_scan",
+      "name": "Refine SCAN",
+      "description": "Run SCAN refinement.",
+      "optional": true,
+      "type": "Flag",
+      "value-key": "[REFINE_SCAN]"
+    },
+    {
+      "command-line-flag": "--refineSCAN_minthreshold",
+      "id": "refine_scan_minthreshold",
+      "name": "SCAN refinement minimum threshold",
+      "description": "Minimum threshold used during SCAN refinement.",
+      "optional": true,
+      "type": "Number",
+      "value-key": "[REFINE_SCAN_MINTHRESHOLD]",
+      "default-value": 3
+    },
+    {
+      "command-line-flag": "--run-spatial-interpolation",
+      "id": "run_spatial_interpolation",
+      "name": "Run spatial interpolation",
+      "description": "Run spatial interpolation on the denoised CIFTI time series before connectivity generation.",
+      "optional": true,
+      "type": "Flag",
+      "value-key": "[RUN_SPATIAL_INTERPOLATION]"
+    }
+  ],
+  "output-files": [
+    {
+      "name": "ReproTM Subject Output Directory",
+      "id": "reprotm_output_dir",
+      "description": "Subject/session-level ReproTM output directory containing the final MATLAB and CIFTI label outputs.",
+      "optional": false,
+      "path-template": "[OUTPUT_DIR]/ReproTM_364caa63+7a4c379b_tpl-MIDB-infant/sub-[SUBJECT_ID]"
+    }
+  ],
+  "groups": [
+    {
+      "id": "connectivity_parameters",
+      "name": "Connectivity parameters",
+      "members": [
+        "minutes",
+        "fd_threshold",
+        "smoothing_kernel",
+        "tr"
+      ]
+    },
+    {
+      "id": "template_parameters",
+      "name": "Template matching parameters",
+      "members": [
+        "minsize",
+        "template_infile",
+        "template_outfile_name",
+        "template_networks",
+        "refine_scan",
+        "refine_scan_minthreshold"
+      ]
+    },
+    {
+      "id": "runtime_parameters",
+      "name": "Runtime parameters",
+      "members": [
+        "mcr_root_v91",
+        "mcr_root_v96",
+        "support_dir"
+      ]
+    },
+    {
+      "id": "processing_options",
+      "name": "Processing options",
+      "members": [
+        "surface_only",
+        "run_spatial_interpolation"
+      ]
+    }
+  ],
+  "tags": {
+    "application-type": [
+      "bids"
+    ],
+    "domain": [
+      "neuroinformatics",
+      "fmri"
+    ]
+  },
+  "suggested-resources": {
+    "cpu-cores": 2,
+    "ram": 300,
+    "walltime-estimate": 18000
+  },
+  "custom": {
+    "cbrain:readonly-input-files": true,
+    "cbrain:author": "Tanya Pandhi <pandh015@umn.edu>",
+    "cbrain:no-run-id-for-outputs": [
+      "reprotm_output_dir"
+    ],
+    "cbrain:integrator_modules": {
+      "BoutiquesOutputFileTypeSetter": {
+        "reprotm_output_dir": "HbcdReproTmOutput"
+      },
+      "BoutiquesOutputTagger": {
+        "reprotm_output_dir": [
+          "reprotm_364caa63+7a4c379b"
+        ]
+      },
+      "BoutiquesForcedOutputBrowsePath": {
+        "reprotm_output_dir": "ReproTM_364caa63+7a4c379b_tpl-MIDB-infant"
+      },
+      "BoutiquesTaskLogsCopier": {
+        "stdout": "[OUTPUT_DIR]/ReproTM_364caa63+7a4c379b_tpl-MIDB-infant/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/stdout_.log",
+        "stderr": "[OUTPUT_DIR]/ReproTM_364caa63+7a4c379b_tpl-MIDB-infant/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/stderr.log",
+        "runtime": "[OUTPUT_DIR]/ReproTM_364caa63+7a4c379b_tpl-MIDB-infant/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/runtime_info.properties",
+        "descriptor": "[OUTPUT_DIR]/ReproTM_364caa63+7a4c379b_tpl-MIDB-infant/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/boutiques_descriptor.json",
+        "invoke": "[OUTPUT_DIR]/ReproTM_364caa63+7a4c379b_tpl-MIDB-infant/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/boutiques_invoke.json",
+        "jobscript": "[OUTPUT_DIR]/ReproTM_364caa63+7a4c379b_tpl-MIDB-infant/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/job_script.sh",
+        "cbrain_params": "[OUTPUT_DIR]/ReproTM_364caa63+7a4c379b_tpl-MIDB-infant/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/cbrain_params.json"
+      },
+      "BoutiquesPostProcessingCleaner": [
+        "work",
+        "[BIDS_DIR]",
+        "[OUTPUT_DIR]"
+      ],
+      "BoutiquesOutputCacheCleaner": [
+        "reprotm_output_dir"
+      ],
+      "BoutiquesInputSubdirMaker": {
+                "bids_dir":     {"dirname": "xcp-d", "append_filename": false, "physical_copy": true}
+              }
+    }
+  }
+}
