@@ -203,7 +203,7 @@
       "name": "ReproTM Subject Output Directory",
       "id": "reprotm_output_dir",
       "description": "Subject/session-level ReproTM output directory containing the final MATLAB and CIFTI label outputs.",
-      "optional": false,
+      "optional": true,
       "path-template": "[OUTPUT_DIR]/ReproTM_d902942d+7a4c379b_tpl-MIDB-infant/sub-[SUBJECT_ID]"
     }
   ],
@@ -280,6 +280,7 @@
       "BoutiquesForcedOutputBrowsePath": {
         "reprotm_output_dir": "ReproTM_d902942d+7a4c379b_tpl-MIDB-infant"
       },
+      "BoutiquesAllowedExitCodes": [ 0, 1 ],
       "BoutiquesTaskLogsCopier": {
         "stdout": "[OUTPUT_DIR]/ReproTM_d902942d+7a4c379b_tpl-MIDB-infant/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/stdout_.log",
         "stderr": "[OUTPUT_DIR]/ReproTM_d902942d+7a4c379b_tpl-MIDB-infant/sub-[SUBJECT_ID]/ses-[SESSION_ID]/.cbrain/stderr.log",
