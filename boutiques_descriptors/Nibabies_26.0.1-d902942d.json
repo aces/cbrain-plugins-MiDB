@@ -40,7 +40,7 @@
         "id":                "anat_only",
         "name":              "anat_only",
         "description":       "Flag to only run anatomical processing (no functional processing).",
-        "type":              "String",
+        "type":              "Flag",
         "optional":          true,
         "command-line-flag": "--anat-only",
         "value-key":         "[ANAT_ONLY]"
