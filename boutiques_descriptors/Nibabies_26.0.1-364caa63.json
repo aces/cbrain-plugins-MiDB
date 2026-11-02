@@ -3,7 +3,7 @@
     "tool-version":        "26.0.1-364caa63",
     "description":         "NiBabies is an open-source software pipeline designed to process anatomical and functional magnetic resonance imaging data.",
     "url":                 "https://nibabies.readthedocs.io/",
-    "command-line":        "true [DERIVATIVES_PREFIX]; nibabies [SUBJECT_DIR] [OUTPUT_DIR] participant --skip_bids_validation [SESSION_ID] --nthreads 4 --omp-nthreads 4 --mem_mb 30000 [VERBOSE] [OUTPUT_SPACES] [DUMMY_SCANS] [FS_LICENSE_FILE] [CIFTI_OUTPUT] --work-dir work [STOP_ON_FIRST_CRASH] [CABINET_OUTPUT] [PROJECT_GOODVOXELS] [SURFACE_RECON_METHOD] [MULTI_STEP_REG] [OUTPUT_LAYOUT]",
+    "command-line":        "true [DERIVATIVES_PREFIX]; nibabies [SUBJECT_DIR] [OUTPUT_DIR] participant --skip_bids_validation [SESSION_ID] [ANAT_ONLY] --nthreads 4 --omp-nthreads 4 --mem_mb 30000 [VERBOSE] [OUTPUT_SPACES] [DUMMY_SCANS] [FS_LICENSE_FILE] [CIFTI_OUTPUT] --work-dir work [STOP_ON_FIRST_CRASH] [CABINET_OUTPUT] [PROJECT_GOODVOXELS] [SURFACE_RECON_METHOD] [MULTI_STEP_REG] [OUTPUT_LAYOUT]",
     "schema-version":      "0.5",
     "container-image":     {
       "image": "nipreps/nibabies:26.0.1",
@@ -35,6 +35,15 @@
         "optional":          true,
         "command-line-flag": "--session-id",
         "value-key":         "[SESSION_ID]"
+      },
+      {
+        "id":                "anat_only",
+        "name":              "anat_only",
+        "description":       "Flag to only run anatomical processing (no functional processing).",
+        "type":              "String",
+        "optional":          true,
+        "command-line-flag": "--anat-only",
+        "value-key":         "[ANAT_ONLY]"
       },
       {
         "id":                "verbose",
